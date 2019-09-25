@@ -1,0 +1,109 @@
+<html>
+    <script>
+
+        let card =[];
+
+//get name of user
+function getName(){
+    return prompt("Please introduce your name");
+}
+//get confirmation to start working with board
+function getConfirm(){
+    return confirm("Do you want to play with this board?");
+}
+//get a random number 1-10
+function genRamNum(){
+    return Math.floor((Math.random() * 10) + 1);
+}
+
+function getNumberSelected(){
+    var allNumbers = [1,2,3,4,5,6,7,8,9,10]
+    var index =  Math.floor((Math.random() * 10) + 1);
+    var numberSelected = allNumbers.splice[index];
+     return Number(numberSelected);
+    
+}
+
+/*
+function getNumberSelected(){
+   var nums = [1,2,3,4,5,6,7,8,9,10],
+    ranNums = [],
+    i = nums.length,
+    j = 0;
+
+    while (i--) {
+        j = Math.floor(Math.random() * (i+1));
+        ranNums.push(nums[j]);
+        numberSelected=Number(nums.splice(j,1));
+        return numberSelected;
+    }
+}
+*/
+//make board with random numbers
+function getCard(){
+    for (let i = 0; i<15; i++){
+        var ramNum=genRamNum();
+        card.push(ramNum);
+    }  
+   console.log(card.slice(0,5) + '\n' + card.slice(5,10) + '\n'+ card.slice(10,15) + '\n');
+
+    if (!getConfirm()){
+        card = getCard();
+    }
+    return card;
+}
+//check if random number
+function matchNum(){
+    matchRanNum = getNumberSelected();
+    for (let i = 0; i<=card.length-1;i++){
+        if (card[i]===matchRanNum){
+            card[i]="X";
+        }
+    } 
+    console.log(
+      `The number that came up is ${matchRanNum} \n`+ 
+        card.slice(0,5) + '\n' + card.slice(5,10) + '\n'+ card.slice(10,15) + '\n');
+    
+  /*  while(card[i]!=="X"){
+        matchNum(card);
+    }*/
+    var continuePlaying = confirm('Do you want to continue?')
+    if(continuePlaying) {
+        matchNum()
+    } else {
+        return alert('Goodbye')
+    }
+}
+
+/*
+function showPointRules(){
+    console.log(`Up to 10 times gets 10 points \nfrom 10 to 50 times gets 5 points \nfor more than 50 times gets 1 point`)
+}
+*/
+function bingo(){
+    let name = getName();
+    if (name.length!==0){
+        console.log(`Welcome ${name}`);
+        getCard();
+        /*showPointRules()*/
+        matchNum();
+        
+        
+    }else {
+        console.log("Please introduce your name")
+    }
+    if (confirm("One more game?")){
+        bingo();
+    }else{
+        console.log(`See you later ${name}`);
+    }  
+}
+bingo();
+
+
+/*
+Exception: SyntaxError: redeclaration of let card
+@Scratchpad/1:1:1
+*/
+    </script>
+</html>
